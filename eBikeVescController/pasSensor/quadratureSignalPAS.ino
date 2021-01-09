@@ -24,6 +24,7 @@ void loop() {
   theta = pasPulseCount*360/pulsesPerRevolution;
   theta = normalizeAngle(theta);
   Serial.println(theta);
+  thetaPrevious = theta;
 }
 
 float normalizeAngle(float angle)
