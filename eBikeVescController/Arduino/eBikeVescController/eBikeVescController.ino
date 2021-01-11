@@ -37,18 +37,18 @@ void loop()
   encoder.tick();
   pedalStopTime = millis();
   newPos = encoder.getPosition();
-  currentDirection = (int)encoder.getDirection(); 
+  currentDirection = (int)encoder.getDirection();  
   if (pos != newPos) 
   {
     timeAtPulseDetection= millis();
     timeDifference = timeAtPulseDetection-previousPulseDetectedTime; 
     pos = newPos;
-    previousPulseDetectedTime=timeAtPulseDetection; 
-    previousDirection = currentDirection;
+    previousPulseDetectedTime=timeAtPulseDetection;
   } 
   if ( (previousDirection != currentDirection) || ( pedalStopTime/1000 - timeAtPulseDetection/1000  > 0.45 ) )
   {
     rpm = 0;
+    pos = 0;
     UART.setDuty(0);
   }
   else 
@@ -76,7 +76,9 @@ void loop()
     {
           dutyCycleToVesc =mapExponential(currentFilteredRPM);    
     }
+    Serial.println(pos);
     UART.setDuty(dutyCycleToVesc);
+    previousDirection = currentDirection;
   }
 } // loop ()
 

@@ -23,7 +23,7 @@ void setup()
 void loop() {
   theta = pasPulseCount*360/pulsesPerRevolution;
   theta = normalizeAngle(theta);
-  Serial.println(theta);
+  Serial.println(direction);
   thetaPrevious = theta;
 }
 
